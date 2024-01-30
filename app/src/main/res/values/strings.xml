@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">pruebasRetrofit</string>
+    <string name="placeholder_result">a</string>
 </resources>

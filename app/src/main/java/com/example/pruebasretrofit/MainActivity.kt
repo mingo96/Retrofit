@@ -1,5 +1,6 @@
 package com.example.pruebasretrofit
 
+import MarsPhotosApp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,11 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.pruebasretrofit.screens.MarsViewModel
 import com.example.pruebasretrofit.ui.theme.PruebasRetrofitTheme
 
 class MainActivity : ComponentActivity() {
+
+    val marsViewModel = MarsViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        marsViewModel
         setContent {
             PruebasRetrofitTheme {
                 // A surface container using the 'background' color from the theme
@@ -22,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    MarsPhotosApp(marsViewModel)
                 }
             }
         }
