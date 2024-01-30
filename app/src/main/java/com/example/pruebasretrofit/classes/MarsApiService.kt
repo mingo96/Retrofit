@@ -14,6 +14,7 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
+/**interfaz que el sistema usará para generar prompts*/
 interface MarsApiService {
     @GET("photos")
     suspend fun getPhotos():String
