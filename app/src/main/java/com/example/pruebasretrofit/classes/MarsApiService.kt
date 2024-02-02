@@ -1,23 +1,26 @@
 package com.example.pruebasretrofit.classes
 
 import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 
 
 private val BASE_URL =
     "https://android-kotlin-fun-mars-server.appspot.com"
 
-//generacion objeto Retrofit
+
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
+    .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
     .baseUrl(BASE_URL)
     .build()
 
 /**interfaz que el sistema usará para generar prompts*/
 interface MarsApiService {
     @GET("photos")
-    suspend fun getPhotos():String
+    suspend fun getPhotos():List<MarsPhoto>
 }
 
 /**objeto singleton que se declara solo la primera ejecucion, sirve para acceder al servicio*/
