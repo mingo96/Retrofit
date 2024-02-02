@@ -16,20 +16,33 @@
 package com.example.pruebasretrofit.screens
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.pruebasretrofit.R
 import com.example.pruebasretrofit.ui.theme.PruebasRetrofitTheme
 
 @Composable
 fun HomeScreen(
-    marsUiState: String, modifier: Modifier = Modifier
+    marsUiState: MarsUiState, modifier: Modifier = Modifier
 ) {
-    ResultScreen(marsUiState, modifier)
+    when(marsUiState){
+        is MarsUiState.Success->{
+            ResultScreen(photos = marsUiState.Photos, modifier = Modifier.fillMaxWidth())
+        }
+        is MarsUiState.Error->{
+            Text(text = "Error cargando los datos", modifier = Modifier.fillMaxWidth(), style = TextStyle(textAlign = TextAlign.Center))
+        }
+        is MarsUiState.Loading -> CircularProgressIndicator()
+    }
 }
 
 /**
