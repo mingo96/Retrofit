@@ -25,20 +25,19 @@ import kotlinx.coroutines.launch
 
 class MarsViewModel : ViewModel() {
 
-    /** The mutable State that stores the status of the most recent request */
+    /** estado mutable que contiene el [MarsUiState] actual*/
     var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
         private set
 
     /**
-     * Call getMarsPhotos() on init so we can display status immediately.
+     * llamamos al metodo de obtener para tener la info cargando desde el principio
      */
     init {
         getMarsPhotos()
     }
 
     /**
-     * Gets Mars photos information from the Mars API Retrofit service and updates the
-     * [MarsPhoto] [List] [MutableList].
+     * recibe la info en forma de [MarsPhoto]s y actualiza los contenidos en corrutina
      */
     fun getMarsPhotos() {
         viewModelScope.launch {
@@ -55,8 +54,9 @@ class MarsViewModel : ViewModel() {
 
 }
 
-
+/**define el estado actual del cargado de informacion, solo se crea uno y es universal*/
 sealed interface MarsUiState{
+    /**contiene la lista de [MarsPhoto]*/
     data class Success(val Photos:List<MarsPhoto>) : MarsUiState
     object Loading :MarsUiState
 

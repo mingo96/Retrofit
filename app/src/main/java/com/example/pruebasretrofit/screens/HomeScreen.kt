@@ -58,10 +58,11 @@ fun HomeScreen(
 }
 
 /**
- * ResultScreen displaying number of photos retrieved.
+ * Muestra el resultado
  */
 @Composable
 fun ResultScreen(photos: List<MarsPhoto>, modifier: Modifier = Modifier) {
+    //las imagenes vienen "en pares", una grande, y una pequeña que la amplia, por eso se muestran de una en una
     LazyVerticalGrid(GridCells.Fixed(1)){
         items(photos){
             AsyncImage(model = it.imgSrc, contentDescription = "imagen", modifier = Modifier.padding(8.dp))
